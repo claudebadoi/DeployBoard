@@ -33,7 +33,7 @@ DeployBoard is a monitoring dashboard designed to check the health, uptime, and 
 
 ```bash
 # Clone repo
-git clone https://github.com/druzzex/DeployBoard.git
+git clone https://github.com/claudebadoi/DeployBoard.git
 cd DeployBoard
 
 # Run locally (Python)
