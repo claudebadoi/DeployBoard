@@ -4,7 +4,7 @@ A simple yet powerful health check dashboard for monitoring websites and service
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow)
-![Last Commit](https://img.shields.io/github/last-commit/druzzex/DeployBoard)
+![Last Commit](https://img.shields.io/github/last-commit/claudebadoi/DeployBoard)
 
 ---
 
@@ -64,19 +64,6 @@ docker run deployboard
 - [ ] Grafana integration (optional)
 
 ---
-
-## 📜 Certifications Associated
-
-- Google Cloud Essentials (Qwiklabs)  
-- Coursera – DevOps Essentials  
-- Docker Mastery – Udemy
-
----
-
-## 👤 Author
-
-**Claudiu Badoi**  
-[GitHub](https://github.com/druzzex)
 
 ---
 
