@@ -1,0 +1,19 @@
+name: Health Check Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run health check script
+      run: |
+        chmod +x check.sh
+        ./check.sh
