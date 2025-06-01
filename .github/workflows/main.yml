@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # permite declanșarea manuală din GitHub UI
 
 jobs:
   check:
@@ -13,7 +14,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Run health check script
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
       run: |
-        chmod +x check.sh
-        ./check.sh
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run health check script
+      run: python scripts/health_check.py
