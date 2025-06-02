@@ -1,0 +1,6 @@
+2025-06-02 14:06:53,477 - https://github.com este UP \u2705
+2025-06-02 14:06:53,923 - https://google.com este UP \u2705
+2025-06-02 14:06:53,934 - https://thisdomaindoesnotexist.tld este DOWN \u274c – Eroare: HTTPSConnectionPool(host='thisdomaindoesnotexist.tld', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000022897452E90>: Failed to resolve 'thisdomaindoesnotexist.tld' ([Errno 11001] getaddrinfo failed)"))
+2025-06-02 14:07:57,597 - https://github.com este UP
+2025-06-02 14:07:58,056 - https://google.com este UP
+2025-06-02 14:07:58,070 - https://thisdomaindoesnotexist.tld este DOWN – Eroare: HTTPSConnectionPool(host='thisdomaindoesnotexist.tld', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D091F92E90>: Failed to resolve 'thisdomaindoesnotexist.tld' ([Errno 11001] getaddrinfo failed)"))
