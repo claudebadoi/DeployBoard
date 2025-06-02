@@ -1,17 +1,24 @@
-import requests  # library for checking https
+import requests  #library for checking https
 import logging
+import sys
+
 from datetime import datetime
 
 #functia pentru loggin in fisierul health_check.log
-logging.basicConfig (
-filename='health_check.log',
-format = '%(asctime)s - %(message)s',
-level = logging.INFO
-)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
+#pentru afisare log in terminalul docker si fisierul log
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+stream_handler = logging.StreamHandler(sys.stdout)
 
+file_handler = logging.FileHandler('health_check.log')
+file_handler.setFormatter(formatter)
 
-# functia pentru verificarea URL
+logger.addHandler(stream_handler)
+logger.addHandler(file_handler)
+
+#functia pentru verificarea URL
 def check_health(url):
     try:
         response = requests.get(url, timeout=5)
