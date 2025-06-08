@@ -7,28 +7,29 @@ from streamlit_autorefresh import st_autorefresh
 from prometheus_client import start_http_server, Gauge
 import threading
 
+# === Pornire server Prometheus ===
 if "prometheus_started" not in st.session_state:
     def start_metrics_server():
         start_http_server(8000)
     threading.Thread(target=start_metrics_server, daemon=True).start()
     st.session_state.prometheus_started = True
 
+# === Inițializare Gauge pentru URL status ===
 if "url_status_gauge" not in st.session_state:
     st.session_state.url_status_gauge = Gauge('url_status', 'Status of the URL (1=UP, 0=DOWN)', ['url'])
 
 url_status = st.session_state.url_status_gauge
 
-# ==== Logging setup ====
+# === Configurare logging (doar în consolă) ===
 logger = logging.getLogger()
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     stream_handler = logging.StreamHandler(sys.stdout)
-    file_handler = logging.FileHandler('health_check.log')
-    file_handler.setFormatter(formatter)
+    stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
-    logger.addHandler(file_handler)
 
+# === Funcție de verificare a stării URL-urilor ===
 def check_health(url):
     try:
         response = requests.get(url, timeout=5)
@@ -37,13 +38,14 @@ def check_health(url):
             logger.info(f"{url} este UP")
         else:
             status = 0
-            logger.warning(f"{url} a raspuns cu codul: {response.status_code}")
+            logger.warning(f"{url} a răspuns cu codul: {response.status_code}")
     except requests.RequestException as e:
         status = 0
         logger.error(f"{url} este DOWN – Eroare: {e}")
     url_status.labels(url=url).set(status)
     return status
 
+# === UI principal ===
 def main():
     st.title("🌐 DeployBoard – Status URL")
     st.write("Verifică starea serviciilor online (actualizare automată la fiecare 10 secunde)")
@@ -71,6 +73,7 @@ def main():
             cols[idx].write(f"Status istoric pentru: **{url}**")
             cols[idx].bar_chart(df)
 
+# === Punctul de intrare ===
 if __name__ == "__main__":
     if "--test" in sys.argv:
         urls = [
